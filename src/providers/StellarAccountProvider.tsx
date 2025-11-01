@@ -8,6 +8,8 @@ import {
 
 interface StellarContextType {
   currentAccount: string;
+  hashId: string;
+  setHashId: React.Dispatch<React.SetStateAction<string>>;
   setCurrentAccount: (name: string) => void;
   getAccount: (name: string) => IAccount | null;
   getCurrentAccountData: () => IAccount | null;
@@ -35,6 +37,8 @@ export const StellarAccountProvider: React.FC<{
     getCurrentAccountFromStorage(),
   );
 
+  const [hashId, setHashId] = useState<string>("");
+
   const setCurrentAccount = useCallback((name: string) => {
     setCurrentAccountState(name);
     saveCurrentAccount(name);
@@ -51,6 +55,8 @@ export const StellarAccountProvider: React.FC<{
 
   const value: StellarContextType = {
     currentAccount,
+    hashId,
+    setHashId,
     setCurrentAccount,
     getAccount,
     getCurrentAccountData,
